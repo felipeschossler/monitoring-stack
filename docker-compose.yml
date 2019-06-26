@@ -1,0 +1,27 @@
+version: "2.4"
+
+volumes:
+  grafana-storage:
+
+services:
+
+  prometheus:
+    image: prom/prometheus:v2.10.0
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    mem_limit: 200M
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:6.2.4
+    container_name: grafana
+    ports:
+      - 3030:3030
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/dashboards/:/grafana/dashboards/
+    restart: unless-stopped
