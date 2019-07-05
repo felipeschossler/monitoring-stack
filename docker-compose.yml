@@ -29,7 +29,7 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
-      - ./grafana/dashboards/:/grafana/dashboards/
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
     networks:
       - monitoring-stack
     mem_limit: 200M
